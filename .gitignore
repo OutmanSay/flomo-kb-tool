@@ -1,0 +1,7 @@
+*.db
+__pycache__/
+*.pyc
+.DS_Store
+flomo_kb/
+.env
+.env.local
