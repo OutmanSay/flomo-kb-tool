@@ -11,8 +11,13 @@ def main():
     p.add_argument("--limit", type=int, default=20)
     args = p.parse_args()
 
-    root = Path(__file__).resolve().parents[1]
-    idx_path = root / "parsed" / "indexes" / "flomo_notes.json"
+    # When running from the openclaw skill dir, resolve to the canonical flomo_kb root
+    _script_root = Path(__file__).resolve().parents[1]
+    _candidate = _script_root / "parsed" / "indexes" / "flomo_notes.json"
+    if _candidate.exists():
+        idx_path = _candidate
+    else:
+        idx_path = Path.home() / "Library" / "Mobile Documents" / "iCloud~md~obsidian" / "Documents" / "Obsidian Vault" / "00-OS" / "runtime" / "flomo_kb" / "parsed" / "indexes" / "flomo_notes.json"
     data = json.loads(idx_path.read_text(encoding="utf-8"))
 
     q = args.q.lower().strip()
