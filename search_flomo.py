@@ -17,7 +17,7 @@ def main():
     if _candidate.exists():
         idx_path = _candidate
     else:
-        idx_path = Path.home() / "Library" / "Mobile Documents" / "iCloud~md~obsidian" / "Documents" / "Obsidian Vault" / "00-OS" / "runtime" / "flomo_kb" / "parsed" / "indexes" / "flomo_notes.json"
+        idx_path = Path(os.getenv("FLOMO_KB_INDEX", str(Path.home() / "flomo_kb" / "parsed" / "indexes" / "flomo_notes.json")))
     data = json.loads(idx_path.read_text(encoding="utf-8"))
 
     q = args.q.lower().strip()
